@@ -16,7 +16,7 @@ variable "separator" {
   default = " "
 }
 variable "length" {
-  default = "2"
+  default = "1"
 }
 variable "file-content" {
   type = map

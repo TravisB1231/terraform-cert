@@ -1,6 +1,6 @@
 resource "local_file" "pet" {
     filename = var.filename
-    content = var.file-content["statement1"]
+    content = "My favorite pet of all time is ${random_pet.my-pet-2.id}"
 }
 
 resource "random_pet" "my-pet-2" {
