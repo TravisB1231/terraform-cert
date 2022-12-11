@@ -14,13 +14,17 @@ resource "aws_iam_policy" "test-policy" {
     ]
   })
 }
-resource "aws_iam_user" "admin-user" {
-  name = "tf-svc-user"
+resource "aws_iam_user" "admin-users" {
+  name =  var.project-users[count.index]
+  count = length(var.project-users)
   tags = {
     Description = "Service user used for Terraform deployment."
   }
 }
 resource "aws_iam_user_policy_attachment" "test-attach" {
-  user  = aws_iam_user.admin-user.name
+  user =  aws_iam_user.admin-users[count.index].name
+  count = length(var.project-users)
   policy_arn = aws_iam_policy.test-policy.arn
 }
+
+# TODO - Create an admin group and do an admin policy attachment instead
